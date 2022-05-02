@@ -1,6 +1,10 @@
 import face_recognition
 import cv2
+import os
 
+cwd = os.getcwd()
+
+print("This is the current working directory",cwd)
 # This is a demo of running face recognition on a video file and saving the results to a new video file.
 #
 # PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
@@ -8,18 +12,18 @@ import cv2
 # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
 # Open the input movie file
-input_movie = cv2.VideoCapture("hamilton_clip.mp4")
+input_movie = cv2.VideoCapture(cwd + "/examples/hamilton_clip.mp4")
 length = int(input_movie.get(cv2.CAP_PROP_FRAME_COUNT))
 
 # Create an output movie file (make sure resolution/frame rate matches input video!)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-output_movie = cv2.VideoWriter('output.avi', fourcc, 29.97, (640, 360))
+output_movie = cv2.VideoWriter(cwd + '/examples/Facial_recognition_output.avi', fourcc, 29.97, (640, 360))
 
 # Load some sample pictures and learn how to recognize them.
-lmm_image = face_recognition.load_image_file("lin-manuel-miranda.png")
+lmm_image = face_recognition.load_image_file(cwd + "/examples/lin-manuel-miranda.png")
 lmm_face_encoding = face_recognition.face_encodings(lmm_image)[0]
 
-al_image = face_recognition.load_image_file("alex-lacamoire.png")
+al_image = face_recognition.load_image_file(cwd + "/examples/alex-lacamoire.png")
 al_face_encoding = face_recognition.face_encodings(al_image)[0]
 
 known_faces = [
@@ -44,7 +48,9 @@ while True:
 
     # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
     rgb_frame = frame[:, :, ::-1]
+    
 
+    
     # Find all the faces and face encodings in the current frame of video
     face_locations = face_recognition.face_locations(rgb_frame)
     face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
@@ -80,7 +86,7 @@ while True:
     # Write the resulting image to the output video file
     print("Writing frame {} / {}".format(frame_number, length))
     output_movie.write(frame)
-
+    
 # All done!
 input_movie.release()
 cv2.destroyAllWindows()
