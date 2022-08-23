@@ -3,6 +3,8 @@ import face_recognition
 import cv2
 import numpy as np
 import os 
+
+
 cwd = os.getcwd()
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -70,6 +72,7 @@ while True:
                 # Find all the faces and face encodings in the current frame of video
                 face_locations = face_recognition.face_locations(rgb_small_frame)
                 face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+                print(face_locations)
 
                 face_names = []
                 for face_encoding in face_encodings:
@@ -129,7 +132,6 @@ while True:
             known_face_names = [
                 "Barack Obama",
                 "Joe Biden",
-
             ]
 
             # Initialize some variables

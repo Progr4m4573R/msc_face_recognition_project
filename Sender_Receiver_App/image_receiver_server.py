@@ -29,4 +29,8 @@ with open(filename, "wb") as f:
 client_socket.close()
 s.close()
 #Now move the file to a different directory
-os.replace(filename, "/home/ighostye/Desktop/face_recognition/examples/target_image/"+str(filename))
+
+#Garry's Linux Laptop
+os.replace(filename, "/home/thinkpad/Desktop/msc_face_recognition_project/examples/target_image/"+str(filename))
+#MY linux DESKTOP F5EP0LA computer
+#os.replace(filename, "/home/ighostye/Desktop/face_recognition/examples/target_image/"+str(filename))
